@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Georgia&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Georgia", "Playfair Display", serif;
+  --font-sans: "Helvetica Neue", Arial, "Poppins", sans-serif;
+
+  --color-bloom-pink: #f7c6d9;
+  --color-bloom-green: #cfe8d5;
+  --color-bloom-cream: #f5f1ea;
+  --color-bloom-gold: #c5a059;
+  --color-bloom-ink: #4a4a4a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans bg-bloom-cream text-bloom-ink;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+.high-density-border {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.high-density-sidebar {
+  background-color: #ffffff;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.text-gold {
+  color: var(--color-bloom-gold);
+}
+
+.bg-gold {
+  background-color: var(--color-bloom-gold);
+}
+
+.pill-button {
+  @apply bg-bloom-green text-emerald-900 px-6 py-2 rounded-full font-bold transition-all;
+}
+.pill-button:hover {
+  @apply opacity-80;
+}
+
+.sharp-button {
+  @apply bg-white text-bloom-ink px-8 py-3 rounded-sm font-bold transition-all;
+}
+.sharp-button:hover {
+  @apply bg-stone-100;
+}
+
+.outline-button {
+  @apply bg-transparent border-2 border-white text-white px-8 py-3 rounded-sm font-bold transition-all;
+}
+.outline-button:hover {
+  @apply bg-white/10;
+}
