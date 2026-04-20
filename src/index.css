@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Georgia&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Playfair Display", serif;
-  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Georgia", "Playfair Display", serif;
+  --font-sans: "Helvetica Neue", Arial, "Poppins", sans-serif;
 
-  --color-miel-coffee: #4a3728;
-  --color-miel-cream: #fbf9f4;
-  --color-miel-beige: #f2ede4;
-  --color-miel-pink: #e8b4bc;
-  --color-miel-green: #a7bca7;
-  --color-miel-gold: #c5a059;
+  --color-bloom-pink: #f7c6d9;
+  --color-bloom-green: #cfe8d5;
+  --color-bloom-cream: #f5f1ea;
+  --color-bloom-gold: #c5a059;
+  --color-bloom-ink: #4a4a4a;
 }
 
 @layer base {
@@ -18,41 +17,57 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply font-sans bg-miel-cream text-stone-800 antialiased;
+    @apply font-sans bg-bloom-cream text-bloom-ink;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-medium;
+    @apply font-serif;
   }
 }
 
-.miel-card {
-  @apply bg-white rounded-2xl border border-black/5 shadow-sm transition-all duration-300;
+.high-density-border {
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.miel-card:hover {
-  @apply shadow-xl -translate-y-1;
+.high-density-sidebar {
+  background-color: #ffffff;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.miel-btn-primary {
-  @apply bg-miel-coffee text-white px-8 py-3 rounded-full font-bold transition-all hover:bg-stone-800 hover:shadow-lg active:scale-95;
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.miel-btn-secondary {
-  @apply bg-transparent border-2 border-miel-coffee text-miel-coffee px-8 py-3 rounded-full font-bold transition-all hover:bg-miel-coffee hover:text-white active:scale-95;
+.text-gold {
+  color: var(--color-bloom-gold);
 }
 
-.section-spacing {
-  @apply py-24 md:py-32;
+.bg-gold {
+  background-color: var(--color-bloom-gold);
 }
 
-.container-wide {
-  @apply max-w-7xl mx-auto px-6;
+.pill-button {
+  @apply bg-bloom-green text-emerald-900 px-6 py-2 rounded-full font-bold transition-all;
+}
+.pill-button:hover {
+  @apply opacity-80;
 }
 
-.text-coffee { color: var(--color-miel-coffee); }
-.bg-coffee { background-color: var(--color-miel-coffee); }
+.sharp-button {
+  @apply bg-white text-bloom-ink px-8 py-3 rounded-sm font-bold transition-all;
+}
+.sharp-button:hover {
+  @apply bg-stone-100;
+}
 
-/* Custom shadow for premium feel */
-.premium-shadow {
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+.outline-button {
+  @apply bg-transparent border-2 border-white text-white px-8 py-3 rounded-sm font-bold transition-all;
+}
+.outline-button:hover {
+  @apply bg-white/10;
 }

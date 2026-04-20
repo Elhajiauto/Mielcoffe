@@ -16,14 +16,11 @@ import {
   ArrowRight,
   Menu as MenuIcon,
   X,
-  Star as StarIcon,
+  Star,
   Flower2,
   ShoppingCart,
   CheckCircle2,
-  Calendar,
-  Facebook,
-  Twitter,
-  Send
+  Calendar
 } from 'lucide-react';
 
 // --- Context ---
@@ -46,88 +43,41 @@ interface MenuItem {
   price: string;
   category: string;
   image: string;
-  description: string;
-  featured?: boolean;
 }
 
 interface Testimonial {
   id: number;
   name: string;
   text: string;
-  role: string;
-  image: string;
+  rating: number;
 }
 
 // --- Data ---
 const MENU_ITEMS: MenuItem[] = [
-  { 
-    id: 1, 
-    name: "Classic Miel Latte", 
-    price: "$6.50", 
-    category: "Coffee", 
-    featured: true,
-    image: "https://images.unsplash.com/photo-1541167760496-162955ed8a4f?auto=format&fit=crop&q=80&w=800",
-    description: "Our signature espresso infused with local honey and organic milk."
-  },
-  { 
-    id: 2, 
-    name: "Lavender Cold Brew", 
-    price: "$6.00", 
-    category: "Iced Drinks", 
-    featured: true,
-    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&q=80&w=800",
-    description: "24-hour steeped brew with a delicate hint of French lavender."
-  },
-  { 
-    id: 3, 
-    name: "Pistachio Miel Macaron", 
-    price: "$3.50", 
-    category: "Pastries", 
-    featured: true,
-    image: "https://images.unsplash.com/photo-1558326567-93630f9a2e30?auto=format&fit=crop&q=80&w=800",
-    description: "Light, airy shells filled with creamy pistachio and honey ganache."
-  },
-  { id: 4, name: "Rose Petal Tart", price: "$5.50", category: "Pastries", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800", description: "Crispy tart with floral cream." },
-  { id: 5, name: "Iced Honey Matcha", price: "$5.50", category: "Iced Drinks", image: "https://images.unsplash.com/photo-1515822338988-151ecdfd4786?auto=format&fit=crop&q=80&w=800", description: "Premium grade matcha with clover honey." },
-  { id: 6, name: "Espresso Cortado", price: "$4.50", category: "Coffee", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=800", description: "Balanced cut of bold espresso and steamed milk." },
+  { id: 1, name: "Rose Petal Latte", price: "$6.50", category: "Coffee", image: "https://images.unsplash.com/photo-1541167760496-162955ed8a4f?auto=format&fit=crop&q=80&w=600" },
+  { id: 2, name: "Lavender Cold Brew", price: "$6.00", category: "Iced Drinks", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&q=80&w=600" },
+  { id: 3, name: "Hibiscus Pastry", price: "$4.50", category: "Pastries", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=600" },
+  { id: 4, name: "Pistachio Macaron", price: "$3.00", category: "Pastries", image: "https://images.unsplash.com/photo-1558326567-93630f9a2e30?auto=format&fit=crop&q=80&w=600" },
+  { id: 5, name: "Matcha Miel", price: "$5.50", category: "Iced Drinks", image: "https://images.unsplash.com/photo-1515822338988-151ecdfd4786?auto=format&fit=crop&q=80&w=600" },
+  { id: 6, name: "Elderflower Espresso", price: "$5.00", category: "Coffee", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=600" },
 ];
 
-const SOCIAL_FEED = [
-  "https://images.unsplash.com/photo-1497933322477-911b33379201?auto=format&fit=crop&q=80&w=600",
-  "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600",
-  "https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?auto=format&fit=crop&q=80&w=600",
-  "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&q=80&w=600",
+const GALLERY_IMAGES = [
+  "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800",
+  "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=800",
+  "https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&q=80&w=800",
+  "https://images.unsplash.com/photo-1497933322477-911b33379201?auto=format&fit=crop&q=80&w=800",
+  "https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?auto=format&fit=crop&q=80&w=800",
+  "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&q=80&w=800",
 ];
 
 const TESTIMONIALS: Testimonial[] = [
-  { id: 1, name: "Elena Kovac", role: "Food Critic", image: "https://i.pravatar.cc/150?u=elena", text: "Miel Coffee isn't just a cafe; it's a sensory sanctuary. The honey-infused latte is world-class." },
-  { id: 2, name: "Marcus Thorne", role: "Digital Creator", image: "https://i.pravatar.cc/150?u=marcus", text: "The perfect workspace. Great lighting, incredible coffee, and a very professional atmosphere." },
-  { id: 3, name: "Sarah Jennings", role: "Local Artist", image: "https://i.pravatar.cc/150?u=sarah", text: "A hidden gem. The boutique floral aspect makes every visit feel like a special occasion." },
+  { id: 1, name: "Sophia Miller", text: "The most beautiful cafe I've ever visited. The rose latte is a must-try!", rating: 5 },
+  { id: 2, name: "James Wilson", text: "A perfect spot for reading. The floral arrangements are stunning and the coffee is top-tier.", rating: 5 },
+  { id: 3, name: "Emma Davis", text: "Instagram heaven! But beyond the looks, the pastries are genuinely delicious.", rating: 4 },
 ];
 
-// --- Sub-Components ---
-
-const SectionTitle = ({ title, subtitle, centered = true }: { title: string, subtitle?: string, centered?: boolean }) => (
-  <div className={`mb-16 ${centered ? 'text-center' : 'text-left'}`}>
-    <motion.span 
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-miel-gold uppercase tracking-[0.2em] font-bold text-sm mb-4 block"
-    >
-      {subtitle}
-    </motion.span>
-    <motion.h2 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.1 }}
-      className="text-4xl md:text-5xl text-miel-coffee leading-tight"
-    >
-      {title}
-    </motion.h2>
-  </div>
-);
+// --- Components ---
 
 const Toast = ({ message, onClose }: { message: string, onClose: () => void }) => {
   useEffect(() => {
@@ -140,10 +90,10 @@ const Toast = ({ message, onClose }: { message: string, onClose: () => void }) =
       initial={{ opacity: 0, y: 50, x: '-50%' }}
       animate={{ opacity: 1, y: 0, x: '-50%' }}
       exit={{ opacity: 0, y: 50, x: '-50%' }}
-      className="fixed bottom-8 left-1/2 -track-x-1/2 z-[100] bg-miel-coffee text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-4 premium-shadow"
+      className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] bg-stone-900 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-white/10"
     >
-      <CheckCircle2 className="text-miel-green w-5 h-5" />
-      <span className="text-sm font-semibold">{message}</span>
+      <CheckCircle2 className="text-bloom-green w-5 h-5" />
+      <span className="text-sm font-medium">{message}</span>
     </motion.div>
   );
 };
@@ -154,19 +104,19 @@ const Modal = ({ type, onClose }: { type: 'booking' | 'contact', onClose: () => 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-stone-900/40 backdrop-blur-md"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div 
-        initial={{ scale: 0.95, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.95, opacity: 0, y: 20 }}
-        className="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl relative"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl relative"
         onClick={e => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 text-stone-400 hover:text-miel-coffee transition-colors z-10"
+          className="absolute top-6 right-6 text-stone-400 hover:text-stone-800 transition-colors"
         >
           <X className="w-6 h-6" />
         </button>
@@ -174,40 +124,33 @@ const Modal = ({ type, onClose }: { type: 'booking' | 'contact', onClose: () => 
         <div className="p-8 md:p-12">
           {type === 'booking' ? (
             <>
-              <SectionTitle title="Reserve a Table" subtitle="Book your moment" centered={false} />
-              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
-                <div className="space-y-2">
-                  <label className="text-xs uppercase font-bold tracking-widest text-stone-400">Full Name</label>
-                  <input type="text" placeholder="John Doe" className="w-full px-6 py-4 bg-miel-cream rounded-xl focus:ring-2 focus:ring-miel-coffee transition-all outline-none" required />
-                </div>
+              <div className="w-16 h-16 bg-bloom-pink/10 rounded-full flex items-center justify-center mb-6">
+                <Calendar className="text-bloom-pink w-8 h-8" />
+              </div>
+              <h2 className="text-3xl font-serif text-stone-800 mb-2">Book a Table</h2>
+              <p className="text-stone-500 mb-8">Reservations for afternoons & weekends.</p>
+              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
+                <input type="text" placeholder="Your Name" className="w-full px-6 py-4 bg-stone-50 rounded-2xl border-none focus:ring-2 focus:ring-bloom-pink transition-all outline-none" required />
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase font-bold tracking-widest text-stone-400">Date</label>
-                    <input type="date" className="w-full px-6 py-4 bg-miel-cream rounded-xl focus:ring-2 focus:ring-miel-coffee transition-all outline-none" required />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase font-bold tracking-widest text-stone-400">Time</label>
-                    <input type="time" className="w-full px-6 py-4 bg-miel-cream rounded-xl focus:ring-2 focus:ring-miel-coffee transition-all outline-none" required />
-                  </div>
+                  <input type="date" className="w-full px-6 py-4 bg-stone-50 rounded-2xl border-none focus:ring-2 focus:ring-bloom-pink transition-all outline-none" required />
+                  <input type="time" className="w-full px-6 py-4 bg-stone-50 rounded-2xl border-none focus:ring-2 focus:ring-bloom-pink transition-all outline-none" required />
                 </div>
-                <button type="submit" className="miel-btn-primary w-full py-5 text-lg">
+                <button type="submit" className="w-full bg-bloom-pink text-white py-4 rounded-2xl font-bold text-lg hover:bg-bloom-pink/90 transition-all shadow-lg hover:shadow-bloom-pink/20">
                   Confirm Reservation
                 </button>
               </form>
             </>
           ) : (
             <>
-              <SectionTitle title="Get in Touch" subtitle="Let's connect" centered={false} />
-              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
-                <div className="space-y-2">
-                  <label className="text-xs uppercase font-bold tracking-widest text-stone-400">Email Address</label>
-                  <input type="email" placeholder="email@example.com" className="w-full px-6 py-4 bg-miel-cream rounded-xl focus:ring-2 focus:ring-miel-coffee transition-all outline-none" required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs uppercase font-bold tracking-widest text-stone-400">Message</label>
-                  <textarea placeholder="How can we help?" rows={4} className="w-full px-6 py-4 bg-miel-cream rounded-xl focus:ring-2 focus:ring-miel-coffee transition-all outline-none" required></textarea>
-                </div>
-                <button type="submit" className="miel-btn-primary w-full py-5 text-lg">
+              <div className="w-16 h-16 bg-bloom-gold/10 rounded-full flex items-center justify-center mb-6">
+                <Mail className="text-bloom-gold w-8 h-8" />
+              </div>
+              <h2 className="text-3xl font-serif text-stone-800 mb-2">Get in Touch</h2>
+              <p className="text-stone-500 mb-8">Questions? Custom floral requests? We're here.</p>
+              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
+                <input type="email" placeholder="Your Email" className="w-full px-6 py-4 bg-stone-50 rounded-2xl border-none focus:ring-2 focus:ring-bloom-gold transition-all outline-none" required />
+                <textarea placeholder="Your Message" rows={4} className="w-full px-6 py-4 bg-stone-50 rounded-2xl border-none focus:ring-2 focus:ring-bloom-gold transition-all outline-none" required></textarea>
+                <button type="submit" className="w-full bg-bloom-gold text-white py-4 rounded-2xl font-bold text-lg hover:bg-stone-800 transition-all shadow-lg">
                   Send Message
                 </button>
               </form>
@@ -219,60 +162,69 @@ const Modal = ({ type, onClose }: { type: 'booking' | 'contact', onClose: () => 
   );
 };
 
-// --- Main Components ---
-
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartCount, openModal } = useAppContext();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const links = [
+  const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
     { name: 'Menu', href: '#menu' },
+    { name: 'About', href: '#about' },
     { name: 'Flowers', href: '#flowers' },
     { name: 'Contact', href: '#contact' },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
-      <div className="container-wide flex justify-between items-center">
-        {/* Logo */}
-        <a href="#home" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-miel-coffee rounded-lg flex items-center justify-center text-white font-serif text-xl font-bold group-hover:scale-110 transition-transform">M</div>
-          <span className={`text-2xl font-serif font-bold tracking-tighter ${isScrolled ? 'text-miel-coffee' : 'text-stone-800'}`}>Miel Coffee</span>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-sm py-4' : 'bg-white py-4'} border-b border-black/5`}>
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <a href="#home" className="text-2xl font-serif font-bold tracking-tight flex items-center gap-2">
+          <span className="text-bloom-gold">MIEL COFFEE</span>
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-10">
-          <div className="flex items-center gap-8">
-            {links.map(link => (
-              <a key={link.name} href={link.href} className="text-xs uppercase font-bold tracking-[0.2em] text-stone-600 hover:text-miel-gold transition-colors">{link.name}</a>
-            ))}
-          </div>
-          <div className="h-4 w-[1px] bg-stone-200"></div>
-          <div className="flex items-center gap-6">
-            <button className="relative p-2 text-miel-coffee hover:scale-110 transition-transform">
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href} 
+              className="text-[13px] font-bold uppercase tracking-widest text-stone-600 hover:text-bloom-gold transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+          <div className="relative group">
+            <button className="p-2 text-stone-600 hover:text-bloom-pink transition-colors relative">
               <ShoppingCart className="w-5 h-5" />
               {cartCount > 0 && (
-                <span className="absolute top-0 right-0 w-4 h-4 bg-miel-gold text-white text-[10px] flex items-center justify-center rounded-full font-bold">{cartCount}</span>
+                <span className="absolute top-0 right-0 w-4 h-4 bg-bloom-pink text-white text-[10px] flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
               )}
             </button>
-            <button onClick={() => openModal('booking')} className="miel-btn-primary !px-6 !py-2 !text-xs !uppercase !tracking-widest">
-              Reserve
-            </button>
           </div>
+          <button 
+            className="pill-button"
+            onClick={() => openModal('booking')}
+          >
+            Visit Us
+          </button>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-miel-coffee" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X /> : <MenuIcon />}
+        <button 
+          className="md:hidden text-stone-800"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X className={isScrolled ? 'text-stone-800' : 'text-white'} /> : <MenuIcon className={isScrolled ? 'text-stone-800' : 'text-white'} />}
         </button>
       </div>
 
@@ -280,17 +232,24 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-black/5 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 w-full bg-white shadow-xl py-8 flex flex-col items-center gap-6 md:hidden"
           >
-            <div className="px-6 py-8 flex flex-col gap-6">
-              {links.map(link => (
-                <a key={link.name} href={link.href} className="text-lg font-serif text-miel-coffee" onClick={() => setIsMenuOpen(false)}>{link.name}</a>
-              ))}
-              <button onClick={() => { openModal('booking'); setIsMenuOpen(false); }} className="miel-btn-primary w-full">Reserve Now</button>
-            </div>
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className="text-lg font-medium text-stone-700 hover:text-bloom-pink"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            ))}
+            <button className="bg-bloom-pink text-white px-8 py-3 rounded-full font-semibold">
+              Visit Us
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -299,283 +258,340 @@ const Navbar = () => {
 };
 
 const Hero = () => {
-  const { openModal } = useAppContext();
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-miel-cream">
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
-        <div className="absolute inset-0 bg-miel-beige/30 z-0"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1200" 
-          alt="Premium coffee bean"
-          className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1]"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-miel-cream/10 to-miel-cream"></div>
-      </div>
-
-      <div className="container-wide relative z-10">
-        <div className="max-w-2xl">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="text-miel-gold uppercase tracking-[0.4em] font-bold text-sm mb-6 block drop-shadow-sm">Artisan Collective</span>
-            <h1 className="text-6xl md:text-8xl text-miel-coffee leading-[1.05] mb-8">
-              Where Coffee <br /> Meets <span className="italic relative">
-                Craft
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-miel-pink/40" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="4" /></svg>
-              </span>
-            </h1>
-            <p className="text-stone-500 text-lg md:text-xl leading-relaxed mb-12 max-w-lg">
-              A cozy place for handcrafted specialty coffee and fresh seasonal blooms. Experience the art of slow living in the heart of the city.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <a href="#menu" className="miel-btn-primary w-full sm:w-auto text-center">View Menu</a>
-              <button onClick={() => openModal('booking')} className="miel-btn-secondary w-full sm:w-auto text-center">Book a Table</button>
-            </div>
-          </motion.div>
+    <section id="home" className="pt-[70px] min-h-screen bg-bloom-cream">
+      <div className="grid lg:grid-cols-[1fr_400px] min-h-[calc(100vh-70px)]">
+        {/* Main Hero Pane */}
+        <div className="relative bg-bloom-pink overflow-hidden flex items-center p-12 lg:p-24">
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=2000" 
+              alt="Coffee shop interior" 
+              className="w-full h-full object-cover opacity-30 mix-blend-overlay"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          </div>
 
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="mt-20 flex items-center gap-10 opacity-60"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative z-10 max-w-xl"
           >
-            <div className="flex flex-col">
-              <span className="text-3xl font-serif text-miel-coffee">12k+</span>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400">Subscribers</span>
-            </div>
-            <div className="w-[1px] h-8 bg-stone-300"></div>
-            <div className="flex flex-col">
-              <span className="text-3xl font-serif text-miel-coffee">4.9/5</span>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400">User Rating</span>
+            <span className="text-white italic font-serif text-xl mb-4 block">Since 2024</span>
+            <h1 className="text-6xl md:text-8xl text-white font-serif mb-6 leading-[1.1]">
+              Where Coffee <br />Meets <span className="italic">Flowers</span>
+            </h1>
+            <p className="text-white text-lg md:text-xl mb-10 leading-relaxed opacity-90">
+              Experience the perfect blend of handcrafted specialty coffee and fresh seasonal blooms in our cozy boutique cafe.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="#menu" className="sharp-button inline-block">Explore Menu</a>
+              <a href="#about" className="outline-button inline-block">Our Story</a>
             </div>
           </motion.div>
+
+          {/* Decorative Corner Element */}
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-bloom-green rounded-tl-[120px] hidden md:flex flex-col items-center justify-center text-center p-6 shadow-2xl">
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-bloom-gold mb-3 shadow-sm">★</div>
+            <div className="font-serif text-xl text-emerald-900 mb-1">Fresh Weekly</div>
+            <div className="text-[10px] uppercase font-bold tracking-widest text-emerald-800 opacity-70">Floral Arrangements</div>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-};
 
-const FeaturedProducts = () => {
-  const { addToCart } = useAppContext();
-  const featured = MENU_ITEMS.filter(i => i.featured);
-
-  return (
-    <section className="section-spacing bg-white">
-      <div className="container-wide">
-        <SectionTitle title="Our Best Sellers" subtitle="Handpicked for you" />
-        <div className="grid md:grid-cols-3 gap-10">
-          {featured.map((item, idx) => (
-            <motion.div 
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="miel-card group p-4"
-            >
-              <div className="h-80 overflow-hidden rounded-xl mb-6 relative">
-                <img 
-                  src={item.image} 
-                  alt={item.name} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-bold text-miel-coffee shadow-sm">
-                  {item.price}
+        {/* High Density Sidebar */}
+        <aside className="high-density-sidebar">
+          {/* Today's Specials */}
+          <div className="p-8 bg-white border-b border-black/5">
+            <h2 className="text-bloom-gold uppercase tracking-widest text-sm font-bold mb-6">Today's Specials</h2>
+            <div className="space-y-6">
+              {[
+                { name: "Rose Petal Latte", desc: "Espresso, steamed milk, rose syrup", price: "$6.50" },
+                { name: "Lavender Cold Brew", desc: "Small-batch lavender blend", price: "$6.00" },
+                { name: "Hibiscus Pastry", desc: "Home-baked floral delight", price: "$4.50" }
+              ].map((special, i) => (
+                <div key={i} className="flex justify-between items-center group cursor-pointer">
+                  <div>
+                    <div className="font-bold text-stone-800 group-hover:text-bloom-gold transition-colors">{special.name}</div>
+                    <div className="text-xs text-stone-400 mt-0.5">{special.desc}</div>
+                  </div>
+                  <div className="font-bold text-stone-900">{special.price}</div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Small Gallery Grid */}
+          <div className="flex-1 p-4 grid grid-cols-2 gap-2 bg-stone-50">
+            <div className="bg-bloom-pink rounded-xl p-4 flex items-end text-[10px] font-bold uppercase tracking-widest text-white shadow-sm hover:opacity-90 transition-opacity cursor-pointer">Gallery</div>
+            <div className="bg-bloom-green rounded-xl p-4 flex items-end text-[10px] font-bold uppercase tracking-widest text-emerald-900 shadow-sm hover:opacity-90 transition-opacity cursor-pointer">Flowers</div>
+            <div className="bg-stone-200 rounded-xl p-4 flex items-end text-[10px] font-bold uppercase tracking-widest text-stone-600 shadow-sm hover:opacity-90 transition-opacity cursor-pointer">Interiors</div>
+            <div className="bg-white border border-stone-100 rounded-xl p-4 flex items-end text-[10px] font-bold uppercase tracking-widest text-stone-400 shadow-sm hover:opacity-90 transition-opacity cursor-pointer">Events</div>
+          </div>
+
+          {/* Quick Contact */}
+          <div className="p-8 bg-white border-t border-black/5">
+            <h2 className="text-bloom-gold uppercase tracking-widest text-sm font-bold mb-4">Visit Us</h2>
+            <div className="text-sm space-y-2 text-stone-600 font-medium">
+              <div>824 Floral Way, Brooklyn, NY</div>
+              <div>Mon - Fri: 7:00 AM - 6:00 PM</div>
+              <div>Sat - Sun: 8:00 AM - 7:00 PM</div>
+              <div className="mt-4 inline-block font-bold border-b border-bloom-gold pb-1 text-stone-800 hover:text-bloom-gold cursor-pointer transition-colors">
+                hello@mielcoffee.com
               </div>
-              <div className="px-2 pb-4">
-                <h3 className="text-2xl mb-2 text-miel-coffee">{item.name}</h3>
-                <p className="text-stone-500 text-sm mb-6 leading-relaxed">{item.description}</p>
-                <button 
-                  onClick={() => addToCart(item.name)}
-                  className="w-full flex items-center justify-center gap-3 bg-miel-beige/30 hover:bg-miel-coffee hover:text-white transition-all py-3 rounded-xl font-bold text-stone-700"
-                >
-                  <ShoppingCart className="w-4 h-4" /> Add to Order
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
   );
 };
 
-const AboutBrand = () => {
+const About = () => {
   return (
-    <section id="about" className="section-spacing bg-miel-cream">
-      <div className="container-wide grid lg:grid-cols-2 gap-20 items-center">
-        <div className="relative">
-          <div className="grid grid-cols-2 gap-6 relative z-10">
-            <motion.img 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=800" 
-              className="rounded-2xl shadow-xl aspect-[1/1.2] object-cover mt-12"
-              alt="Floral arrangements"
-            />
-            <motion.img 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" 
-              className="rounded-2xl shadow-xl aspect-[1/1.2] object-cover"
-              alt="Cafe interior"
-            />
-          </div>
-          <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-miel-pink/20 rounded-full blur-3xl -z-0"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white rounded-full flex items-center justify-center z-20 shadow-2xl">
-            <Flower2 className="text-miel-gold w-12 h-12" />
-          </div>
-        </div>
+    <section id="about" className="py-24 bg-white px-6">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="relative"
+        >
+          <div className="absolute -top-10 -left-10 w-64 h-64 bg-bloom-green/30 rounded-full blur-3xl z-0"></div>
+          <img 
+            src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=1000" 
+            alt="Floral coffee experience" 
+            className="rounded-xl shadow-sm relative z-10 w-full aspect-[4/5] object-cover"
+            referrerPolicy="no-referrer"
+          />
+        </motion.div>
 
-        <div>
-          <SectionTitle title="A Sanctuary for the Senses" subtitle="The Miel Concept" centered={false} />
-          <p className="text-stone-500 text-lg leading-relaxed mb-8">
-            Miel Coffee was born from a simple desire: to blend the comforting warmth of artisan coffee with the revitalizing beauty of fresh botanicals. 
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-serif text-bloom-ink mb-8 leading-tight">
+            The Concept Behind <br /><span className="text-bloom-gold italic underline decoration-bloom-pink/30">Miel Coffee</span>
+          </h2>
+          <p className="text-stone-500 text-lg leading-relaxed mb-6">
+            We believe that the ritual of morning coffee should be as beautiful as it is delicious. Miel Coffee was born from a desire to blend the sensory delight of fresh botanicals with the rich, comforting aromas of specialty coffee.
           </p>
-          <div className="space-y-6 mb-10">
-            {[
-              { title: "Specialty Roasted", desc: "Small-batch beans sourced from ethical cooperatives.", icon: <Coffee className="w-5 h-5" /> },
-              { title: "Boutique Florals", desc: "Hand-tied bouquets inspired by the season.", icon: <Flower2 className="w-5 h-5" /> },
-              { title: "Curated Space", desc: "Designed for comfort, productivity, and calm.", icon: <MapPin className="w-5 h-5" /> }
-            ].map((feature, i) => (
-              <div key={i} className="flex items-start gap-5">
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-miel-gold shadow-sm flex-shrink-0 border border-black/5">{feature.icon}</div>
-                <div>
-                  <h4 className="text-miel-coffee font-serif text-xl">{feature.title}</h4>
-                  <p className="text-stone-400 text-sm">{feature.desc}</p>
-                </div>
-              </div>
-            ))}
+          <p className="text-stone-500 text-lg leading-relaxed mb-8">
+            Every corner of our shop is curated with seasonal flowers, creating an ever-changing atmosphere that inspires creativity and calm.
+          </p>
+          
+          <div className="grid grid-cols-2 gap-8 mb-10 border-t border-black/5 pt-8">
+            <div>
+              <h3 className="text-bloom-gold font-serif text-3xl mb-1">2k+</h3>
+              <p className="text-stone-400 text-[10px] uppercase font-bold tracking-widest">Happy Visitors</p>
+            </div>
+            <div>
+              <h3 className="text-bloom-gold font-serif text-3xl mb-1">50+</h3>
+              <p className="text-stone-400 text-[10px] uppercase font-bold tracking-widest">Flower Varieties</p>
+            </div>
           </div>
-          <button className="miel-btn-primary">Learn Our Story</button>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const MenuSection = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const { addToCart } = useAppContext();
-  const categories = ['All', 'Coffee', 'Iced Drinks', 'Pastries'];
-
-  const filtered = activeCategory === 'All' ? MENU_ITEMS : MENU_ITEMS.filter(i => i.category === activeCategory);
-
-  return (
-    <section id="menu" className="section-spacing bg-white">
-      <div className="container-wide">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-lg">
-            <SectionTitle title="Signature Menu" subtitle="Our Daily Craft" centered={false} />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {categories.map(cat => (
-              <button 
-                key={cat} 
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${activeCategory === cat ? 'bg-miel-coffee text-white shadow-lg' : 'bg-miel-cream text-stone-500 hover:bg-stone-200'}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filtered.map(item => (
-              <motion.div 
-                key={item.id} 
-                layout 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="miel-card p-4 group"
-              >
-                <div className="h-64 rounded-xl overflow-hidden mb-5 relative group-hover:shadow-lg transition-all">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-serif text-miel-coffee">{item.name}</h3>
-                  <span className="font-bold text-miel-gold">{item.price}</span>
-                </div>
-                <p className="text-stone-400 text-sm mb-6 line-clamp-2">{item.description}</p>
-                <button 
-                  onClick={() => addToCart(item.name)} 
-                  className="w-full flex items-center justify-center gap-2 border border-stone-100 py-3 rounded-xl font-bold text-stone-600 hover:bg-miel-coffee hover:text-white hover:border-miel-coffee transition-all"
-                >
-                  <ShoppingCart className="w-4 h-4" /> Add to Order
-                </button>
-              </motion.div>
-            ))}
-          </AnimatePresence>
         </motion.div>
       </div>
     </section>
   );
 };
 
-const TestimonialsSection = () => {
+const Menu = () => {
+  const [activeCategory, setActiveCategory] = useState('All');
+  const { addToCart } = useAppContext();
+  const categories = ['All', 'Coffee', 'Iced Drinks', 'Pastries'];
+
+  const filteredItems = activeCategory === 'All' 
+    ? MENU_ITEMS 
+    : MENU_ITEMS.filter(item => item.category === activeCategory);
+
   return (
-    <section className="section-spacing bg-miel-cream">
-      <div className="container-wide">
-        <SectionTitle title="Guest Experiences" subtitle="The Miel Community" />
-        <div className="grid md:grid-cols-3 gap-10">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.div 
-              key={t.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white p-10 rounded-3xl premium-shadow"
+    <section id="menu" className="py-24 bg-bloom-cream px-6">
+      <div className="max-w-7xl mx-auto text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-serif mb-4">Our Signature Menu</h2>
+        <p className="text-stone-500 max-w-xl mx-auto">Discover our handcrafted beverages and artisanal treats, infused with floral notes and made with love.</p>
+        
+        {/* Category Tabs */}
+        <div className="flex flex-wrap justify-center gap-4 mt-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-8 py-2 rounded-full text-sm font-medium transition-all ${
+                activeCategory === cat 
+                ? 'bg-bloom-pink text-white shadow-md scale-105' 
+                : 'bg-white text-stone-600 hover:bg-stone-100'
+              }`}
             >
-              <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, idx) => <StarIcon key={idx} className="w-4 h-4 fill-miel-gold text-miel-gold" />)}
-              </div>
-              <p className="text-stone-600 text-lg italic mb-10 leading-relaxed">"{t.text}"</p>
-              <div className="flex items-center gap-4 border-t border-stone-50 pt-8">
-                <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-miel-cream" />
-                <div>
-                  <h4 className="font-serif text-lg text-miel-coffee">{t.name}</h4>
-                  <p className="text-[10px] uppercase font-bold tracking-widest text-stone-400">{t.role}</p>
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <motion.div 
+        layout
+        className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredItems.map((item) => (
+            <motion.div
+              key={item.id}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all group"
+            >
+              <div className="h-64 overflow-hidden relative">
+                <img 
+                  src={item.image} 
+                  alt={item.name} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-bold text-bloom-gold">
+                  {item.price}
                 </div>
+              </div>
+              <div className="p-6">
+                <span className="text-xs text-bloom-pink font-semibold uppercase tracking-widest block mb-2">{item.category}</span>
+                <h3 className="text-xl font-serif text-stone-800 mb-2">{item.name}</h3>
+                <p className="text-stone-500 text-sm leading-relaxed mb-4">Crafted with the finest organic ingredients and a hint of botanical essence.</p>
+                <button 
+                  onClick={() => addToCart(item.name)}
+                  className="w-full py-3 border border-stone-200 rounded-xl text-stone-700 font-semibold hover:bg-bloom-pink hover:text-white hover:border-bloom-pink transition-all flex items-center justify-center gap-2"
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  Add to Order
+                </button>
               </div>
             </motion.div>
           ))}
+        </AnimatePresence>
+      </motion.div>
+    </section>
+  );
+};
+
+const Flowers = () => {
+  const { openModal } = useAppContext();
+  return (
+    <section id="flowers" className="py-24 bg-white px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex-1 order-2 lg:order-1"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif text-stone-800 mb-8">Boutique <span className="text-bloom-pink">Florals</span></h2>
+            <p className="text-stone-600 text-lg mb-8 leading-relaxed">
+              Our in-house floral studio creates bespoke arrangements for daily gifting, weddings, and special events. We source the freshest seasonal stems to bring life to your space.
+            </p>
+            
+            <ul className="space-y-4 mb-10 text-stone-700">
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-bloom-pink/20 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-bloom-pink"></div>
+                </div>
+                Daily Signature Bouquets
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-bloom-pink/20 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-bloom-pink"></div>
+                </div>
+                Subscription Floral Deliveries
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-bloom-pink/20 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-bloom-pink"></div>
+                </div>
+                Bespoke Event Styling
+              </li>
+            </ul>
+
+            <button 
+              onClick={() => openModal('contact')}
+              className="bg-stone-800 text-white px-10 py-4 rounded-full font-semibold hover:bg-bloom-pink transition-all shadow-lg"
+            >
+              Order Flowers
+            </button>
+          </motion.div>
+
+          <div className="flex-1 order-1 lg:order-2 grid grid-cols-2 gap-4">
+            <motion.img 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              src="https://images.unsplash.com/photo-1516627145497-ae69688d2741?auto=format&fit=crop&q=80&w=600" 
+              alt="Flower bouquet" 
+              className="rounded-3xl w-full aspect-square object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <motion.img 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              src="https://images.unsplash.com/photo-1519340333755-5072134dc23a?auto=format&fit=crop&q=80&w=600" 
+              alt="Flower boutique" 
+              className="rounded-3xl w-full aspect-square object-cover mt-8"
+              referrerPolicy="no-referrer"
+            />
+            <motion.img 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              src="https://images.unsplash.com/photo-1522673607200-1648835ace98?auto=format&fit=crop&q=80&w=600" 
+              alt="Coffee and flowers" 
+              className="rounded-3xl w-full aspect-square object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <motion.img 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=600" 
+              alt="Florist workshop" 
+              className="rounded-3xl w-full aspect-square object-cover mt-8"
+              referrerPolicy="no-referrer"
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-const SocialFeed = () => {
+const Gallery = () => {
   return (
-    <section className="section-spacing bg-white overflow-hidden">
-      <div className="container-wide mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <SectionTitle title="Social Collective" subtitle="Follow Our Story" centered={false} />
-        <a href="#" className="flex items-center gap-2 text-miel-coffee font-bold hover:text-miel-gold transition-colors">
-          <Instagram className="w-5 h-5" /> @mielcoffee_official
-        </a>
+    <section className="py-24 bg-bloom-cream overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
+        <h2 className="text-4xl font-serif mb-4">Inside the Miel</h2>
+        <p className="text-stone-500">Capture the moments. Share your experience with #MielCoffee</p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4">
-        {SOCIAL_FEED.map((img, i) => (
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-[400px]">
+        {GALLERY_IMAGES.map((img, idx) => (
           <motion.div 
-            key={i} 
-            whileHover={{ scale: 1.02, zIndex: 10 }}
-            className="aspect-square relative overflow-hidden group cursor-pointer"
+            key={idx}
+            whileHover={{ scale: 1.05, zIndex: 10 }}
+            className="h-full relative overflow-hidden cursor-pointer"
           >
-            <img src={img} className="w-full h-full object-cover grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110" alt="Instagram post" />
-            <div className="absolute inset-0 bg-miel-coffee/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <img 
+              src={img} 
+              alt={`Gallery ${idx}`} 
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-bloom-pink/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
               <Instagram className="text-white w-8 h-8" />
             </div>
           </motion.div>
@@ -585,68 +601,106 @@ const SocialFeed = () => {
   );
 };
 
-const BookingSection = () => {
-  const { openModal } = useAppContext();
+const Testimonials = () => {
   return (
-    <section className="section-spacing bg-miel-coffee text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-miel-gold/10 -skew-x-12 translate-x-1/2"></div>
-      <div className="container-wide relative z-10 flex flex-col lg:flex-row items-center gap-16">
-        <div className="flex-1 text-center lg:text-left">
-          <span className="text-miel-pink uppercase tracking-widest font-bold text-sm mb-4 block">Reservations</span>
-          <h2 className="text-5xl md:text-6xl mb-8 leading-tight">Elevate Your Afternoon <br /> with <span className="italic">Miel</span></h2>
-          <p className="text-white/70 text-lg mb-10 max-w-xl">
-            From intimate gatherings to focused work sessions, book your table in advance and let us prepare for your arrival. 
-          </p>
-          <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
-            <button onClick={() => openModal('booking')} className="bg-white text-miel-coffee px-10 py-5 rounded-full font-bold text-lg hover:bg-miel-beige transition-all shadow-xl">
-              Book a Table
-            </button>
-            <div className="flex items-center gap-4 text-white/60">
-              <Phone className="w-5 h-5 text-miel-pink" />
-              <span className="font-bold">+1 (234) 567 8900</span>
-            </div>
-          </div>
+    <section className="py-24 bg-white px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-serif mb-4">Love from Our Community</h2>
         </div>
-        <div className="flex-1 w-full max-w-md">
-          <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10">
-            <h3 className="text-2xl font-serif mb-6 flex items-center gap-3"><Clock className="text-miel-pink" /> Peak Hours</h3>
-            <div className="space-y-4 text-stone-300">
-              <div className="flex justify-between items-center pb-4 border-b border-white/5">
-                <span>Breakfast Session</span>
-                <span className="text-white font-bold">07:00 – 10:30</span>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {TESTIMONIALS.map((t) => (
+            <motion.div 
+              key={t.id}
+              whileHover={{ y: -10 }}
+              className="bg-bloom-cream p-10 rounded-3xl relative"
+            >
+              <div className="flex gap-1 mb-6">
+                {[...Array(t.rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-bloom-gold text-bloom-gold" />
+                ))}
               </div>
-              <div className="flex justify-between items-center pb-4 border-b border-white/5 text-miel-pink">
-                <span>Botanical Tea Time</span>
-                <span className="font-bold underline">15:00 – 17:30</span>
+              <p className="text-stone-600 italic text-lg mb-8 leading-relaxed">"{t.text}"</p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-bloom-pink rounded-full"></div>
+                <div>
+                  <h4 className="font-bold text-stone-800">{t.name}</h4>
+                  <p className="text-xs text-stone-400 uppercase tracking-widest">Customer</p>
+                </div>
               </div>
-              <div className="flex justify-between items-center">
-                <span>Evening Calm</span>
-                <span className="text-white font-bold">18:00 – 20:00</span>
-              </div>
-            </div>
-          </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-const NewsletterSignup = () => {
+const Contact = () => {
   return (
-    <section className="py-20 bg-miel-beige/20">
-      <div className="container-wide text-center">
-        <h3 className="text-3xl font-serif text-miel-coffee mb-4">Stay in the Miel Collective</h3>
-        <p className="text-stone-500 mb-8 max-w-md mx-auto">Get monthly seasonal updates, special offers, and early event access.</p>
-        <form className="max-w-lg mx-auto flex flex-col sm:flex-row gap-4" onSubmit={e => e.preventDefault()}>
-          <input 
-            type="email" 
-            placeholder="Your Email Address" 
-            className="flex-1 px-8 py-4 bg-white rounded-full border border-black/5 focus:ring-2 focus:ring-miel-coffee outline-none transition-all shadow-sm"
-          />
-          <button className="miel-btn-primary flex items-center justify-center gap-2 group">
-            Subscribe <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </form>
+    <section id="contact" className="py-24 bg-stone-900 text-white px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16">
+          <div>
+            <span className="text-bloom-pink font-semibold uppercase tracking-widest text-xs mb-4 block underline underline-offset-8">Contact Us</span>
+            <h2 className="text-5xl font-serif mb-10">Say Hello or <br />Book a Table</h2>
+            
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center flex-shrink-0">
+                  <MapPin className="text-bloom-pink w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-xl mb-1">Our Location</h4>
+                  <p className="text-white/60 font-light">123 Botanical Avenue, Garden District<br />Floral City, FC 45012</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Clock className="text-bloom-pink w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-xl mb-1">Opening Hours</h4>
+                  <p className="text-white/60 font-light">Mon - Fri: 07:00 AM - 08:00 PM<br />Sat - Sun: 08:00 AM - 09:00 PM</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Phone className="text-bloom-pink w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-xl mb-1">Phone & Email</h4>
+                  <p className="text-white/60 font-light">(555) 123-4567<br />hello@mielcoffee.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-4 mt-12">
+              <a href="#" className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-bloom-pink transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-bloom-pink transition-colors">
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          <div className="rounded-3xl overflow-hidden shadow-2xl h-[500px] border border-white/10 group">
+            {/* Replace with real map embed or placeholder */}
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.018299103632!2d-122.4194155!3d37.7749295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed43f7210e30b!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1625000000000!5m2!1sen!2sus" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0, filter: 'grayscale(1) invert(0.9) contrast(1.2)' }} 
+              allowFullScreen={true} 
+              loading="lazy"
+              title="Miel Coffee Location"
+            ></iframe>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -654,67 +708,8 @@ const NewsletterSignup = () => {
 
 const Footer = () => {
   return (
-    <footer className="footer bg-stone-900 text-white pt-24 pb-12">
-      <div className="container-wide">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-          <div className="space-y-6">
-            <a href="#home" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-stone-900 font-serif font-bold">M</div>
-              <span className="text-2xl font-serif font-bold tracking-tighter">Miel Coffee</span>
-            </a>
-            <p className="text-stone-400 text-sm leading-relaxed">
-              Crafting premium coffee experiences infused with local honey and artisanal blooms since 2024.
-            </p>
-            <div className="flex gap-4">
-              {[Instagram, Facebook, Twitter].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-miel-gold transition-colors">
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-lg uppercase tracking-widest font-bold mb-8">Navigation</h4>
-            <ul className="space-y-4 text-stone-400 text-sm">
-              <li><a href="#home" className="hover:text-white transition-colors">Home Experience</a></li>
-              <li><a href="#about" className="hover:text-white transition-colors">Our Concept</a></li>
-              <li><a href="#menu" className="hover:text-white transition-colors">Artisan Menu</a></li>
-              <li><a href="#flowers" className="hover:text-white transition-colors">Boutique Florals</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-lg uppercase tracking-widest font-bold mb-8">Visit Us</h4>
-            <ul className="space-y-4 text-stone-400 text-sm">
-              <li className="flex items-start gap-3">
-                <MapPin className="text-miel-gold w-4 h-4 mt-1" />
-                <span>123 Botanical Ave, <br />Garden District, FC 45012</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Clock className="text-miel-gold w-4 h-4" />
-                <span>Open Daily: 07:00 – 20:00</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="text-miel-gold w-4 h-4" />
-                <span>hello@mielcoffee.com</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-lg uppercase tracking-widest font-bold mb-8">Careers</h4>
-            <p className="text-stone-400 text-sm mb-6">Want to join the artisan collective?</p>
-            <button className="text-miel-gold font-bold border-b border-miel-gold/30 pb-1 hover:text-white transition-colors">
-              Send Your CV
-            </button>
-          </div>
-        </div>
-
-        <div className="border-t border-white/5 pt-12 text-center text-stone-500 text-xs tracking-widest uppercase">
-          © 2024 MIEL COFFEE COLLECTIVE. ALL RIGHTS RESERVED.
-        </div>
-      </div>
+    <footer className="h-[70px] bg-bloom-cream border-t border-black/5 flex items-center justify-center font-bold text-[10px] text-stone-400 uppercase tracking-[3px] px-6">
+      © 2024 MIEL COFFEE & FLOWERS. ALL RIGHTS RESERVED.
     </footer>
   );
 };
@@ -735,16 +730,15 @@ export default function App() {
 
   return (
     <AppContext.Provider value={{ cartCount, addToCart, openModal }}>
-      <div className="antialiased">
+      <div className="antialiased overflow-x-hidden">
         <Navbar />
         <Hero />
-        <FeaturedProducts />
-        <AboutBrand />
-        <MenuSection />
-        <TestimonialsSection />
-        <SocialFeed />
-        <BookingSection />
-        <NewsletterSignup />
+        <About />
+        <Menu />
+        <Flowers />
+        <Gallery />
+        <Testimonials />
+        <Contact />
         <Footer />
 
         <AnimatePresence>
